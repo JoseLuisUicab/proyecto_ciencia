@@ -1,3 +1,4 @@
+#hola soy jose luis este es mi proyecto personal de ciencia de datos.
 # plotting package
 library(ggplot2)
 # piping / chaining
@@ -26,6 +27,20 @@ View(datasetnuevo)
 
 #ligas y su cantidad de equipos la NBA es la mejor liga de basquetbol
 #cantidad de equipos en la NBA
+
+#forma de un dataframe
+League_teams<-data.frame(
+  league=datasetnuevo$lgID,
+    teams=datasetnuevo$name)
+head(League_teams)
+
+QTeams <- League_teams %>%
+  group_by(league) %>%
+  count(teams)
+QTeams
+
+#forma anterior que funciona exacatmente lo mismo
+
 
 nba<-subset(datasetnuevo,datasetnuevo$lgID=="NBA")
 nba<-nba %>%
@@ -86,7 +101,7 @@ pie(Cantidad_de_equipos,Liga,main = "cantidad de equipos por liga"
   #     fill =  c("red", "yellow", "green","turquoise","blue","Hot Pink"))
 
 #ggplot(basquet, aes(x=Liga, y=Cantidad_de_equipos)) + geom_bar(stat = "identity", width = 0.5,fill=rgb(231/255, 76/255, 60/255),color="white" )+ coord_flip()+theme(panel.background = element_rect(fill = "#EAECEE"))+theme(plot.background = element_rect(fill = "#3498DB"))
-write.csv(equipos_por_ligas,"~/8 SEMESTRE/CIENCIA DE DATOS/proyectociencia/equipos_por_ligas.csv")
+write.csv(equipos_por_ligas,"proyectociencia/equipos_por_ligas.csv")
 
 #===================================================================
 #los equipos mas ganadores de la NBA enla temporrada 2010 y 2011 como locales
@@ -116,7 +131,7 @@ View(equipos_ganadores)
 ggplot(equipos_ganadores, aes(x=victorias_en_casa, y=nombre_equipos)) + geom_bar(stat = "identity", width = 0.5,fill=rgb(127/255, 179/255, 213/255))
 #promedio de victorias e casa
 
-write.csv(equipos_ganadores,"~/8 SEMESTRE/CIENCIA DE DATOS/proyectociencia/equipos_ganadores.csv")
+write.csv(equipos_ganadores,"proyectociencia/equipos_ganadores.csv")
 View(datasetnuevo)
 
 #==========================================================================================
@@ -135,7 +150,7 @@ View(equiposperdi)
 equipos_perdedores<-subset()
 ggplot(equipos_perdedores, aes(x=perdidos, y=equipo)) + geom_bar(stat = "identity", width = 0.5,fill=rgb(127/255, 179/255, 213/255))
 
-write.csv(equipos_perdedores,"~/8 SEMESTRE/CIENCIA DE DATOS/proyectociencia/equipos_perdedores.csv")
+write.csv(equipos_perdedores,"proyectociencia/equipos_perdedores.csv")
 View(equipos_perdedores)
 
 

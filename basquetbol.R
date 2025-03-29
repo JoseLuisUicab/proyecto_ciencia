@@ -22,8 +22,10 @@ datasetnuevo <- select(basketball_teams, -(confID),-(confRank),-(playoff),-(o_3p
                          -(neutWon),-(neutLoss),-(confWon),-(confLoss),-(pace),-(divID),
                          -(attendance))
 
-write.csv(datasetnuevo,"proyectociencia/datasetnuevo.csv")
+write.csv(datasetnuevo,"proyectociencia/datos_limpios.csv")
 View(datasetnuevo)
+
+read.csv("proyectociencia/datos_limpios.csv")
 
 #ligas y su cantidad de equipos la NBA es la mejor liga de basquetbol
 #cantidad de equipos en la NBA
@@ -31,13 +33,27 @@ View(datasetnuevo)
 #forma de un dataframe
 League_teams<-data.frame(
   league=datasetnuevo$lgID,
-    teams=datasetnuevo$name)
+  teams=datasetnuevo$name)
 head(League_teams)
 
 QTeams <- League_teams %>%
   group_by(league) %>%
-  count(teams)
+  distinct(teams) %>%
+  dplyr::summarise(num_equipos = n())
 QTeams
+
+ggplot(QTeams,aes(x="",y=tteams,fill=group)) +
+  geom_bar(stat ="identity",width = 1)+
+  coord_polar("y",start = 0)
+
+pie(QTeams,main = "cantidad de equipos por liga")
+
+write.csv(QTeams,"proyectociencia/cantidadaquipos.csv")
+View(QTeams)
+
+#color<-c("#1874CD","green","#757575","yellow","red","#CD6600")
+
+
 
 #forma anterior que funciona exacatmente lo mismo
 
@@ -80,13 +96,15 @@ NPBL
 nba<-subset(datasetnuevo,datasetnuevo$lgID=="PBLA")
 nba<-nba %>%
   distinct(nba$name)
-PBLA <- length(nba$name)
+PBLA <- length(`nba$name`)
 PBLA
 
 Liga<-c("NBA","ABA","ABL1","NBL","NPBL","PBLA")
 Cantidad_de_equipos<-c(NBA,ABA,ABL1,NBL,NPBL,PBLA)
+
 equipos_por_ligas<-data.frame(Liga,Cantidad_de_equipos)
 View(equipos_por_ligas)
+
 Liga<- paste(Liga, Cantidad_de_equipos)
 Liga<- paste(Liga, " equipos", sep = "")
 

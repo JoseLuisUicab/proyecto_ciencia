@@ -1,3 +1,5 @@
 *.csv
 *.pdf
-.RData
+*.RData
+*.pbix
+codigo.R

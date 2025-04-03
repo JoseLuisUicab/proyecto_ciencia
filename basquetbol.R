@@ -42,14 +42,32 @@ QTeams <- League_teams %>%
   dplyr::summarise(num_equipos = n())
 QTeams
 
-ggplot(QTeams,aes(x="",y=tteams,fill=group)) +
-  geom_bar(stat ="identity",width = 1)+
-  coord_polar("y",start = 0)
-
-pie(QTeams,main = "cantidad de equipos por liga")
-
 write.csv(QTeams,"proyectociencia/cantidadaquipos.csv")
 View(QTeams)
+
+ggplot(QTeams, aes(x = "", y = num_equipos, fill = league)) +
+  geom_bar(stat = "identity", width = 1) +  # Crear las barras
+  coord_polar(theta = "y") +  # Convertir el gráfico a un gráfico circular
+  theme_void() +  # Eliminar los ejes y fondo
+  labs(title = "Distribución de Equipos por Liga") +  # Título
+  theme(axis.text.x = element_blank()) +  # Opcional: para eliminar las etiquetas en el eje X
+  geom_text(aes(label = num_equipos),  # Etiquetas con la cantidad de equipos
+            position = position_stack(vjust = 0.5),  # Centrar las etiquetas
+            color = "white")  # Color del texto
+
+num_equipos <- QTeams$league
+labels <-QTeams$num_equipos
+
+colors <- c("red", "green", "blue", "purple", "orange", "cyan")
+
+# Create the pie chart
+pie(League_teams, 
+    labels = labels, 
+    main = "Cantidad de equipos por liga", 
+    col = colors, 
+    border = "white")  # Optional: Add white borders between slices
+
+
 
 #color<-c("#1874CD","green","#757575","yellow","red","#CD6600")
 
@@ -126,9 +144,9 @@ write.csv(equipos_por_ligas,"proyectociencia/equipos_por_ligas.csv")
 temporadas<- data.frame(nombre_equipos=c(datasetnuevo$name)
                             ,victorias_en_casa=c(datasetnuevo$homeWon),
                         liga=c(datasetnuevo$lgID)
-                        ,a�o=c(datasetnuevo$year))
+                        ,anio=c(datasetnuevo$year))
 
-promtem2010<-(temporadas[temporadas$a�o==2009,]$victorias_en_casa)
+promtem2010<-(temporadas[temporadas$anio==2009,]$victorias_en_casa)
 View(promtem2010)
 pro2010<-mean(promtem2010)
 pro2010
@@ -153,17 +171,17 @@ write.csv(equipos_ganadores,"proyectociencia/equipos_ganadores.csv")
 View(datasetnuevo)
 
 #==========================================================================================
-#los equipos que perdieron mas partidos repcto al promedio de perdidos en el a�os 2010 de la NBA
-los<-data.frame(a�o=c(datasetnuevo$year),
+#los equipos que perdieron mas partidos repcto al promedio de perdidos en el anios 2010 de la NBA
+los<-data.frame(anio=c(datasetnuevo$year),
                 liga=c(datasetnuevo$lgID)
                 ,perdidos=c(datasetnuevo$lost)
                 ,equipo=c(datasetnuevo$name))
 
-promedio<-(los[los$a�o==2010,]$perdidos)
+promedio<-(los[los$anio==2010,]$perdidos)
 pro<-mean(promedio)
 pro
 
-equiposperdi<-data.frame(los,los$a�o==2010  & los$perdidos>pro &los$liga=="NBA")
+equiposperdi<-data.frame(los,los$anio==2010  & los$perdidos>pro &los$liga=="NBA")
 View(equiposperdi)
 equipos_perdedores<-subset()
 ggplot(equipos_perdedores, aes(x=perdidos, y=equipo)) + geom_bar(stat = "identity", width = 0.5,fill=rgb(127/255, 179/255, 213/255))
@@ -174,7 +192,7 @@ View(equipos_perdedores)
 
 #====================================================================================
 #cuantos el equipo mas defensivo en la historia de la NBA
-defe<-data.frame(a�o=c(datasetnuevo$year),equipo=c(datasetnuevo$name),)
+defe<-data.frame(anio=c(datasetnuevo$year),equipo=c(datasetnuevo$name),)
 
 
 # barplot(height=Partidos_Perdidos, names=Equipos,

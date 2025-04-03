@@ -7,4 +7,4 @@ la cual se extrae los datos de un CSV mediante el lenguaje R la cual aprendi
 - funcion filter entre otras de R
 - creacion de distintas graficas usando la libreria GGplot2
 - manejo de vectores concat
-- analsis de la interpretacion de los datos
+- analisis de la interpretacion de los datos 

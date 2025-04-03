@@ -1,4 +1,4 @@
-#hola soy jose luis este es mi proyecto personal de ciencia de datos.
+#hola soy jose luis este es mi proyecto personal de ciencia de datos. 2023
 # plotting package
 library(ggplot2)
 # piping / chaining
@@ -11,7 +11,7 @@ library(plotrix)
 
 #leemos el archivo CSV
 basketball_teams <- read.csv("proyectociencia/basketball_teams.csv")
-View(basketball_teams) 
+View(basketball_teams)
 
 #sacar nuevo dataset con los datos que necesitamos.
 datasetnuevo <- select(basketball_teams, -(confID),-(confRank),-(playoff),-(o_3pm),
@@ -61,10 +61,10 @@ labels <-QTeams$num_equipos
 colors <- c("red", "green", "blue", "purple", "orange", "cyan")
 
 # Create the pie chart
-pie(League_teams, 
-    labels = labels, 
-    main = "Cantidad de equipos por liga", 
-    col = colors, 
+pie(League_teams,
+    labels = labels,
+    main = "Cantidad de equipos por liga",
+    col = colors,
     border = "white")  # Optional: Add white borders between slices
 
 

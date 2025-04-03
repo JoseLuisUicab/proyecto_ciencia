@@ -2,4 +2,5 @@
 *.pdf
 *.RData
 *.pbix
-codigo.R
+*codigo.R
+*.xd

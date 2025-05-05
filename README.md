@@ -15,3 +15,4 @@ la cual se extrae los datos de un CSV mediante el lenguaje R la cual aprendi
 https://www.youtube.com/watch?v=4paQ2wObDQ4&t=625s
 
 http://10.3.10.54:5500/index.html
+https://glpi-developer-documentation.readthedocs.io/en/master/plugins/tutorial.html
